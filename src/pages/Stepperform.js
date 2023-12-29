@@ -5,6 +5,7 @@ import Skillsdetails from "./stepperform/skillsdetails";
 import Credentaildetails from "./stepperform/credentaildetails";
 import { Stepper, Step, StepLabel, Button, Typography } from "@mui/material";
 import Layout from "../component/Layout";
+import { HTTPSURL } from "./../constant.js";
 import { Link, useNavigate } from "react-router-dom";
 const steps = [
   "Personal Information",
@@ -31,11 +32,11 @@ export default function Stepperform() {
   const navigate = useNavigate();
 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  
+
   const handleSubmit = async () => {
     try {
       const response = await fetch(
-        "http://codetentacles-006-site36.htempurl.com/api/api/seller-create",
+        `${HTTPSURL}http://codetentacles-006-site36.htempurl.com/api/api/seller-create`,
         {
           method: "POST",
           headers: {
@@ -43,13 +44,13 @@ export default function Stepperform() {
             token: userInfo.token,
           },
           body: JSON.stringify(userData),
-        }
+        },
       );
-      if(response.ok){
-        navigate('/List')
+      if (response.ok) {
+        navigate("/List");
       }
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   };
   const handleNext = () => {

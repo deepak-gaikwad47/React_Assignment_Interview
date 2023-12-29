@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { HTTPSURL } from "./../constant.js";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -8,7 +10,7 @@ export default function Login() {
     try {
       e.preventDefault();
       const response = await fetch(
-        "http://codetentacles-006-site36.htempurl.com/api/api/login",
+        `${HTTPSURL}http://codetentacles-006-site36.htempurl.com/api/api/login`,
         {
           method: "POST",
           headers: {
@@ -18,7 +20,7 @@ export default function Login() {
             email,
             password,
           }),
-        }
+        },
       );
       const data = await response.json();
       localStorage.setItem("userInfo", JSON.stringify(data));
@@ -28,11 +30,11 @@ export default function Login() {
         navigate("/Product");
       }
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   };
   return (
-    <>  
+    <>
       <section
         className="border-red-500 login-form min-h-screen flex items-center justify-center bg-img"
         style={{ backgroundImage: "url('/assets/image/bbblurry.svg')" }}

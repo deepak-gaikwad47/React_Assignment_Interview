@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../../component/Layout";
+import { HTTPSURL } from "../../constant.js";
 import { Link, useNavigate } from "react-router-dom";
 export default function Addproduct() {
   const [product, setProduct] = useState({
@@ -22,7 +23,7 @@ export default function Addproduct() {
   const handleSubmit = async () => {
     try {
       const response = await fetch(
-        "http://codetentacles-006-site36.htempurl.com/api/api/create-product",
+        `${HTTPSURL}http://codetentacles-006-site36.htempurl.com/api/api/create-product`,
         {
           method: "POST",
           headers: {
@@ -30,14 +31,14 @@ export default function Addproduct() {
             token: userInfo.token,
           },
           body: JSON.stringify(product),
-        }
+        },
       );
       if (response.ok) {
         await response.json();
         navigate("/Product");
       }
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   };
   return (

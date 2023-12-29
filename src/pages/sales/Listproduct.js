@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "../../component/VTable";
 import Layout from "../../component/Layout";
 import { Link } from "react-router-dom";
+import { HTTPSURL } from "../../constant.js";
 export default function Product() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,14 +20,14 @@ export default function Product() {
   const fetchProducts = async () => {
     try {
       const result = await fetch(
-        "http://codetentacles-006-site36.htempurl.com/api/api/product-list",
+        `${HTTPSURL}http://codetentacles-006-site36.htempurl.com/api/api/product-list`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
             token: userInfo.token,
           },
-        }
+        },
       );
       const data = await result.json();
       setProducts(data.data);
@@ -36,7 +37,7 @@ export default function Product() {
   };
 
   useEffect(() => {
-      fetchProducts();
+    fetchProducts();
   }, [rowsPerPage]);
 
   const columns = [

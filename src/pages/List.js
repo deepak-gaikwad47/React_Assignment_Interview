@@ -3,6 +3,8 @@ import Table from "../component/VTable";
 import Layout from "../component/Layout";
 import { Link } from "react-router-dom";
 import { Trash2 } from "lucide-react";
+import { HTTPSURL } from "./../constant.js";
+
 export default function List() {
   const [userData, setUserData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,19 +15,19 @@ export default function List() {
   const fetchList = async () => {
     try {
       const result = await fetch(
-        "http://codetentacles-006-site36.htempurl.com/api/api/seller-list",
+        `${HTTPSURL}http://codetentacles-006-site36.htempurl.com/api/api/seller-list`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
             token: userInfo.token,
           },
-        }
+        },
       );
       const data = await result.json();
       setUserData(data);
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   };
   const handlePageChange = (event, newPage) => {
@@ -38,14 +40,14 @@ export default function List() {
   const deleteUser = async (userId) => {
     try {
       const response = await fetch(
-        `http://codetentacles-006-site36.htempurl.com/api/api/seller-delete?userId=${userId}`,
+        `${HTTPSURL}http://codetentacles-006-site36.htempurl.com/api/api/seller-delete?userId=${userId}`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
             token: userInfo.token,
           },
-        }
+        },
       );
       const data = await response.json();
       if (response.ok) {
@@ -53,7 +55,7 @@ export default function List() {
       }
       alert(data.message);
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   };
   const handleDelete = async (userId) => {
